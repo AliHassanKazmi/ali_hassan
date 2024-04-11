@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>da</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        function callDashboardFunction() {
+          setTimeout(dashboardFunction, 2000);
+          setInterval(dashboardFunction, 3000);
+        }
+
+        function dashboardFunction() {
+          $.ajax({
+            url: "/mechanical/allequipment",
+            method: "GET",
+            data: { data: "status" },
+            success: function (response) {
+              // Parse JSON response
+              var data = JSON.parse(response);
+              // Calculate counts of running, stopped, and fault equipment
+              var runningCount = data.filter(
+                (item) => item.Status === 1 && item.Fault === 0
+              ).length;
+              var stoppedCount = data.filter(
+                (item) => item.Status === 0 && item.Fault === 0
+              ).length;
+              var faultCount = data.filter((item) => item.Fault === 1).length;
+              // Get chart options based on fault count
+              var chartOptions = getChartOptions(
+                runningCount,
+                stoppedCount,
+                faultCount
+              );
+              // Render chart
+              renderChart(chartOptions);
+            },
+            error: function (xhr, status, error) {
+              console.error("Ajax request failed:", status, error);
+            },
+          });
+        }
+
+        function getChartOptions(runningCount, stoppedCount, faultCount) {
+          var total = runningCount + stoppedCount + faultCount;
+          var titleText =
+            faultCount > 0
+              ? `${faultCount}/${total}`
+              : `${runningCount}/${total}`;
+          var colors =
+            faultCount > 0
+              ? ["#ff0000", "#808080", "#0000ff"]
+              : ["#0000ff", "#808080"];
+          var options = {
+            title: {
+              text: titleText,
+              left: "center",
+              top: "center",
+              textStyle: {
+                fontSize: 16,
+                fontWeight: "bold",
+              },
+            },
+            series: [
+              {
+                type: "pie",
+                radius: ["50%", "70%"],
+                avoidLabelOverlap: false,
+                label: {
+                  show: false,
+                  position: "center",
+                },
+                emphasis: {
+                  label: {
+                    show: true,
+                    fontSize: "20",
+                    fontWeight: "bold",
+                  },
+                },
+                labelLine: {
+                  show: false,
+                },
+                data: [
+                  { value: runningCount, name: "Running" },
+                  { value: stoppedCount, name: "Stopped" },
+                ],
+                color: colors,
+              },
+            ],
+          };
+          return options;
+        }
+
+        function renderChart(options) {
+          var chart = echarts.init(document.getElementById("chart-container"));
+          chart.setOption(options);
+        }
+
+        callDashboardFunction();
+      });
+    </script>
+  </head>
+  <body>
+    <div id="chart-container" style="width: 400px; height: 400px"></div>
+  </body>
+</html>

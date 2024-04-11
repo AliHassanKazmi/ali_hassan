@@ -1,0 +1,11 @@
+venv/
+*.pyc
+__pycache__/
+myproject/settings/local.py
+staticfiles/
+media/
+*.log
+.env
+.vscode/
+.idea/
+*~

@@ -19,7 +19,6 @@
             method: "GET",
             data: { data: "status" },
             success: function (response) {
-              // Parse JSON response
               var data = response;
               var runningCount = data.filter(
                 (item) => item.Status === 1 && item.Fault === 0

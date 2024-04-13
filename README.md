@@ -2,4 +2,4 @@
 
 Create you virtual environment by typing:
 
-python -m venv <NameOfYourVirtualEnvironment>
+python -m venv 'NameOfYourVirtualEnvironment'

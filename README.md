@@ -1,2 +1,5 @@
 # ali_hassan
-Coding exercise 
+
+Create you virtual environment by typing:
+
+python -m venv <NameOfYourVirtualEnvironment>

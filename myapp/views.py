@@ -15,7 +15,6 @@ data = [
 def mechanical(request, equipment):
     result = [item for item in data if item["Equipment"] == equipment]
 
-    # Check if result is found
     if result:
         return JsonResponse(result[0])
     else:

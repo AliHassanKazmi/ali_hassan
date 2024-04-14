@@ -19,12 +19,16 @@ from django.urls import path
 from myapp.views import mechanical
 from myapp.views import all_equipment
 from myapp.views import dashboard_view
+from myapp.views import chart_view
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('mechanical/<str:equipment>/', mechanical, name='mechanical'),
     path('allequipment/', all_equipment, name='all_equipment'),
     path('dash/', dashboard_view, name='dashboard'),
+    path('chart/', chart_view, name='chart'),
+
 
 
 

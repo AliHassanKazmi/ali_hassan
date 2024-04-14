@@ -27,3 +27,6 @@ def all_equipment(request):
 
 def dashboard_view(request):
     return render(request, 'dashboard.html')
+
+def chart_view(request):
+    return render(request, 'chart.html')

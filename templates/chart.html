@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ring Chart</title>
+    <style>
+      .ring-chart {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: 20px solid transparent;
+      }
+      .faulty {
+        border-color: red;
+      }
+      .working {
+        border-color: blue;
+      }
+      .stopped {
+        border-color: #ccc;
+      }
+      .red-segment {
+        border-top-color: red;
+      }
+      .blue-segment {
+        border-top-color: blue;
+      }
+      .gray-segment {
+        border-top-color: #ccc;
+      }
+      .center-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ring-chart faulty">
+      <div class="center-text">2/218</div>
+    </div>
+  </body>
+</html>

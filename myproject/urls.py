@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('mechanical/<str:equipment>/', mechanical, name='mechanical'),
     path('allequipment/', all_equipment, name='all_equipment'),
-    path('dashboard/', dashboard_view, name='dashboard'),
+    path('dash/', dashboard_view, name='dashboard'),
 
 
 

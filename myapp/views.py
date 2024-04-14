@@ -17,7 +17,6 @@ def mechanical(request, equipment):
     # Filter data based on equipment
     result = [item for item in data if item["Equipment"] == equipment]
 
-    # Check if result is found
     if result:
         # Return the first matching item as JSON response
         return JsonResponse(result[0])
